@@ -1,0 +1,61 @@
+% Copywright <2020> <Md Salman Nazir>
+% This software is distributed under the 3-clause BSD License.
+
+% Model parameters
+
+Ntcl = 1000;
+h = 10 ;      % seconds
+R = 2 ;       % degreeC/kW
+C = 10;       % kWh/degreeC
+P = 14.00;    % kW
+eff = 2.5 ;   % performance efficiency
+Ta = 32 ;     % Ambiant temperature
+Delta = 0.5; % dead band degreeC
+Tset = 20;    % set point
+a = exp(-h / (C*R*60*60)); %
+Tmax =  Tset + Delta/2; 
+Tmin =  Tset - Delta/2; 
+
+% Simulation parameters 
+wn = 0.003; % noise (uniform)
+
+% Variable set up
+Tsim = 6*60*3; % sim steps
+T(1:Ntcl,1:Tsim) = 0; % temperature matrix 
+M = T*0; % on/off matrix
+
+% initial condition 
+T(:,1) = Tmin + rand(Ntcl,1)*Delta; 
+M(:,1) = round(rand(Ntcl,1)) ; 
+
+% simulation
+for i=1:Ntcl
+    for k = 2:Tsim
+        m = M(i,k-1);
+        if T(i,k-1)> Tmax
+            m = 1;
+        elseif T(i,k-1)< Tmin
+            m = 0; 
+        end
+        M(i,k) = m; 
+        T(i,k) = a*T(i,k-1) + (1 - a)*(Ta - m*R*P)+ wn*(rand(1)-rand(1));      
+    end
+end
+
+Power = sum(M,1)/Ntcl; % normalized aggregate power consumed
+
+%%
+
+display = randi(Ntcl,1,20);
+
+% temperature plot
+subplot(2,1,1) 
+plot(1:Tsim, T(display,:))
+xlim([1 Tsim])
+ylim([Tmin Tmax])
+
+% power plot
+subplot(2,1,2)
+plot(1:Tsim, Power)
+xlim([1 Tsim])
+ylim([0 1])
