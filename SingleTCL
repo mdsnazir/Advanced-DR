@@ -1,0 +1,32 @@
+
+
+h = 10 ;      % seconds
+R = 2 ;       % degreeC/kW
+C = 10;       % kWh/degreeC
+P = 14.00;    % kW
+eff = 2.5 ;   % performance efficiency
+Ta = 32 ;     % Ambiant temperature
+deltaT = 0.5; % degreeC
+
+Tset = 20;    % set point
+Delta = .5;   % dead band
+
+a = exp(-h / (C*R*60*60)); %
+ 
+Tsim = 60*10; % sim steps
+T(1:Tsim) = 0; 
+T(1) = Tset; 
+
+m = 0;
+
+for k = 2:Tsim
+    
+    if T(k-1)> Tset + Delta/2
+        m = 1;
+    elseif T(k-1)< Tset - Delta/2
+        m = 0; 
+    end
+    T(k) = a*T(k-1) + (1 - a)*(Ta - m*R*P);         
+     
+end
+plot(1:Tsim,T)
