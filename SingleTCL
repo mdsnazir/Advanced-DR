@@ -1,4 +1,5 @@
-
+% Copywright <2020> <Md Salman Nazir>
+% This software is distributed under the 3-clause BSD License.
 
 h = 10 ;      % seconds
 R = 2 ;       % degreeC/kW
