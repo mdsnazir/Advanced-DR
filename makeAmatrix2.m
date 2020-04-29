@@ -1,3 +1,6 @@
+% Copywright <2020> <Md Salman Nazir>
+% This software is distributed under the 3-clause BSD License.
+
 function A = makeAmatrix2(Nb,a0,a1)
     A = zeros(2*Nb);
     for i = 2:Nb
