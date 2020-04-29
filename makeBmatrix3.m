@@ -1,3 +1,6 @@
+% Copywright <2020> <Md Salman Nazir>
+% This software is distributed under the 3-clause BSD License.
+
 function [B] = makeBmatrix3(Nbins,Nbdn,Nbup)
 
 Nb = Nbins; % number of bins
