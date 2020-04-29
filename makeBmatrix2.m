@@ -1,3 +1,6 @@
+% Copywright <2020> <Md Salman Nazir>
+% This software is distributed under the 3-clause BSD License.
+
 function [B] = makeBmatrix2(Nbins,dir,frac)
 
 %unclrbin = ceil(Nb/2); %upper boundary of unclearing bin i (lower boundary of bin (i+1) :all bins above upper boundary of 'unclrbin' are cleared
