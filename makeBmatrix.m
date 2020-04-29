@@ -1,5 +1,5 @@
-% Copywright: Md Salman Nazir
-% 01/29/2020
+% Copywright <2020> <Md Salman Nazir>
+% This software is distributed under the 3-clause BSD License.
 
 function B = makeBmatrix(Nb,unclrbin)
 % Control - B-matrix for priority- or market-based on/off switching of TCLs
