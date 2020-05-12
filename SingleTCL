@@ -1,7 +1,10 @@
 % Copywright <2020> <Md Salman Nazir>
 % This software is distributed under the 3-clause BSD License.
 
-h = 10 ;      % seconds
+% Simulation of the temperature and on/off dynamics of a TCL (cooling) (e.g. air-conditioner). 
+
+% Parameters 
+h = 10 ;      % time-duration in one step in seconds
 R = 2 ;       % degreeC/kW
 C = 10;       % kWh/degreeC
 P = 14.00;    % kW
@@ -12,13 +15,13 @@ deltaT = 0.5; % degreeC
 Tset = 20;    % set point
 Delta = .5;   % dead band
 
-a = exp(-h / (C*R*60*60)); %
+a = exp(-h / (C*R*60*60)); 
  
-Tsim = 60*10; % sim steps
-T(1:Tsim) = 0; 
-T(1) = Tset; 
+Tsim = 60*10;  % sim steps
+T(1:Tsim) = 0; % temperature vector
+T(1) = Tset;   % initial condition
 
-m = 0;
+m = 0;         % thermosat on/off status
 
 for k = 2:Tsim
     
@@ -30,4 +33,6 @@ for k = 2:Tsim
     T(k) = a*T(k-1) + (1 - a)*(Ta - m*R*P);         
      
 end
+
+% plot
 plot(1:Tsim,T)
