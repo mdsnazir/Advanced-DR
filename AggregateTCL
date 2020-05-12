@@ -24,11 +24,11 @@ Tsim = 6*60*3; % sim steps
 T(1:Ntcl,1:Tsim) = 0; % temperature matrix 
 M = T*0; % on/off matrix
 
-% initial condition 
+% Initial condition 
 T(:,1) = Tmin + rand(Ntcl,1)*Delta; 
 M(:,1) = round(rand(Ntcl,1)) ; 
 
-% simulation
+% Simulation
 for i=1:Ntcl
     for k = 2:Tsim
         m = M(i,k-1);
@@ -44,8 +44,7 @@ end
 
 Power = sum(M,1)/Ntcl; % normalized aggregate power consumed
 
-%%
-
+% Randomly choose 20 TCLs for plotting their trajectories
 display = randi(Ntcl,1,20);
 
 % temperature plot
